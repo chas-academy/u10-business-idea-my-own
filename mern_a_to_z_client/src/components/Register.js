@@ -4,16 +4,12 @@ import '../App.css';
 import axios from 'axios';
 
 
-class CreateBook extends Component {
+class Register extends Component {
     constructor() {
         super();
         this.state = {
-            title: '',
-            isbn: '',
-            author: '',
-            description: '',
-            published_date: '',
-            publisher: ''
+            username: '',
+            password: ''
         };
     }
 
@@ -47,13 +43,13 @@ class CreateBook extends Component {
                 this.props.history.push('/');
             })
             .catch(err => {
-                console.log("Error in CreateBook!");
+                console.log("Error in Register!");
             })
     };
 
     render() {
         return (
-            <div className="CreateBook">
+            <div className="Register">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
@@ -148,4 +144,4 @@ class CreateBook extends Component {
     }
 }
 
-export default CreateBook;
+export default Register;

@@ -28,10 +28,9 @@ class ShowBookList extends Component {
 
     render() {
         const books = this.state.books;
-        console.log("PrintBook: " + books);
         let bookList;
 
-        if (!books) {
+        if (books !== []) {
             bookList = "there is no book record!";
         } else {
             bookList = books.map((book, k) =>
