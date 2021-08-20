@@ -15,7 +15,6 @@ class User extends Component {
         axios
             .get('http://localhost:8082/api/users/' + this.props.match.params.id)
             .then(res => {
-                // console.log("Print-showBookDetails-API-response: " + res.data);
                 this.setState({
                     user: res.data
                 });

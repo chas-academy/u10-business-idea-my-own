@@ -7,6 +7,7 @@ const UserCard = (props) => {
 
     return (
         <div className="card-container">
+            <img src="https://static.coindesk.com/wp-content/uploads/2021/04/dogecoin.jpg" alt="" />
             <div className="desc">
                 <h2>
                     <Link to={`/user/${user._id}`}>
