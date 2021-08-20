@@ -4,7 +4,7 @@
 
 Using mongoDB Atlas as the database.
 
-This project doesnt really have a structer as it's just built to meet the requirements
+This project doesnt really have a flowing theme as it's just built to meet the requirements
 
 
 <h3> HOW TO INSTALL AND START </h3>
