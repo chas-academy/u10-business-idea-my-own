@@ -14,8 +14,8 @@ router.get('/test', (req, res) => res.send('user route testing!'));
 // @access Public
 router.get('/', (req, res) => {
     User.find()
-        .then(users => res.json(books))
-        .catch(err => res.status(404).json({ nobooksfound: 'No Users found' }));
+        .then(users => res.json(users))
+        .catch(err => res.status(404).json({ nousersfound: 'No Users found' }));
 });
 
 // @route GET api/users/:id
@@ -23,8 +23,8 @@ router.get('/', (req, res) => {
 // @access Public
 router.get('/:id', (req, res) => {
     User.findById(req.params.id)
-        .then(user => res.json(book))
-        .catch(err => res.status(404).json({ nobookfound: 'No User found' }));
+        .then(user => res.json(user))
+        .catch(err => res.status(404).json({ nousersfound: 'No User found' }));
 });
 
 // @route GET api/users

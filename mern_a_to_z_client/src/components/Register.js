@@ -21,24 +21,16 @@ class Register extends Component {
         e.preventDefault();
 
         const data = {
-            title: this.state.title,
-            isbn: this.state.isbn,
-            author: this.state.author,
-            description: this.state.description,
-            published_date: this.state.published_date,
-            publisher: this.state.publisher
+            username: this.state.username,
+            password: this.state.password
         };
 
         axios
-            .post('http://localhost:8082/api/books', data)
+            .post('http://localhost:8082/api/users', data)
             .then(res => {
                 this.setState({
-                    title: '',
-                    isbn: '',
-                    author: '',
-                    description: '',
-                    published_date: '',
-                    publisher: ''
+                    username: '',
+                    password: ''
                 })
                 this.props.history.push('/');
             })
@@ -61,17 +53,17 @@ class Register extends Component {
                         <div className="col-md-8 m-auto">
                             <h1 className="display-4 text-center">Add Book</h1>
                             <p className="lead text-center">
-                                Create new book
+                                Register user
                             </p>
 
                             <form noValidate onSubmit={this.onSubmit}>
                                 <div className='form-group'>
                                     <input
                                         type='text'
-                                        placeholder='Title of the Book'
-                                        name='title'
+                                        placeholder='Username'
+                                        name='username'
                                         className='form-control'
-                                        value={this.state.title}
+                                        value={this.state.username}
                                         onChange={this.onChange}
                                     />
                                 </div>
@@ -79,58 +71,14 @@ class Register extends Component {
 
                                 <div className='form-group'>
                                     <input
-                                        type='text'
-                                        placeholder='ISBN'
-                                        name='isbn'
+                                        type='password'
+                                        placeholder='Password'
+                                        name='password'
                                         className='form-control'
-                                        value={this.state.isbn}
+                                        value={this.state.password}
                                         onChange={this.onChange}
                                     />
                                 </div>
-
-                                <div className='form-group'>
-                                    <input
-                                        type='text'
-                                        placeholder='Author'
-                                        name='author'
-                                        className='form-control'
-                                        value={this.state.author}
-                                        onChange={this.onChange}
-                                    />
-                                </div>
-
-                                <div className='form-group'>
-                                    <input
-                                        type='text'
-                                        placeholder='Describe this book'
-                                        name='description'
-                                        className='form-control'
-                                        value={this.state.description}
-                                        onChange={this.onChange}
-                                    />
-                                </div>
-
-                                <div className='form-group'>
-                                    <input
-                                        type='date'
-                                        placeholder='published_date'
-                                        name='published_date'
-                                        className='form-control'
-                                        value={this.state.published_date}
-                                        onChange={this.onChange}
-                                    />
-                                </div>
-                                <div className='form-group'>
-                                    <input
-                                        type='text'
-                                        placeholder='Publisher of this Book'
-                                        name='publisher'
-                                        className='form-control'
-                                        value={this.state.publisher}
-                                        onChange={this.onChange}
-                                    />
-                                </div>
-
                                 <input
                                     type="submit"
                                     className="btn btn-outline-warning btn-block mt-4"
