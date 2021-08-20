@@ -30,7 +30,7 @@ class ShowBookList extends Component {
         const books = this.state.books;
         let bookList;
 
-        if (books !== []) {
+        if (!books) {
             bookList = "there is no book record!";
         } else {
             bookList = books.map((book, k) =>
@@ -50,6 +50,14 @@ class ShowBookList extends Component {
                         <div className="col-md-8">
                             <Link to="/create-book" className="btn btn-outline-warning float-right">
                                 + Add New Book
+                            </Link>
+                            <br />
+                            <br />
+                            <hr />
+                        </div>
+                        <div className="col-md-1">
+                            <Link to="/users" className="btn btn-outline-warning float-right">
+                                All Users
                             </Link>
                             <br />
                             <br />
@@ -100,10 +108,10 @@ function getCookie(cname) {
     let ca = decodedCookie.split(';');
     for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
-        while (c.charAt(0) == ' ') {
+        while (c.charAt(0) === ' ') {
             c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
+        if (c.indexOf(name) === 0) {
             return c.substring(name.length, c.length);
         }
     }

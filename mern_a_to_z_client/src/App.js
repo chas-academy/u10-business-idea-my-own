@@ -9,6 +9,7 @@ import UpdateBookInfo from './components/UpdateBookInfo';
 import Register from './components/Register';
 import Login from './components/Login';
 import User from './components/User';
+import ShowUsers from './components/ShowUsers';
 
 class App extends Component {
     render() {
@@ -22,6 +23,7 @@ class App extends Component {
                     <Route path='/register' component={Register} />
                     <Route path='/login' component={Login} />
                     <Route path='/user/:id' component={User} />
+                    <Route path='/users/' component={ShowUsers} />
                 </div>
             </Router>
         );
