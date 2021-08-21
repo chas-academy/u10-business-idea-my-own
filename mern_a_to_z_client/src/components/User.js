@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import axios from 'axios';
+import CommentCard from './CommentCard';
 
 class User extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {}
-        };
+            user: {},
+            comments: [],
+            author: '',
+            targetUser: '',
+            title: '',
+            description: ''
+        }
     }
 
     componentDidMount() {
@@ -21,6 +27,39 @@ class User extends Component {
             })
             .catch(err => {
                 console.log("Error from ShowUserDetails");
+            });
+        console.log(this.props);
+        axios
+            .get('http://localhost:8082/api/comments/' + this.props.match.params.id)
+            .then(res => {
+                this.setState({
+                    comments: res.data
+                });
+            })
+            .catch(err => {
+                console.log("Error from ShowCommentDetails");
+            });
+    };
+    onSubmit = e => {
+        e.preventDefault();
+
+        const data = {
+            author: getCookie("user"),
+            targetUser: this.state.user._id,
+            title: this.state.title,
+            description: this.state.description
+        };
+        axios
+            .post('http://localhost:8082/api/comments', data)
+            .then(res => {
+                this.setState({
+                    comments: []
+                })
+                this.props.history.push(this.state.user._id);
+                window.location.reload();
+            })
+            .catch(err => {
+                console.log("Error in Register!");
             })
     };
 
@@ -42,20 +81,34 @@ class User extends Component {
         document.cookie = "user=; path=/";
         window.location.assign("/")
     }
+    onChange = e => {
+        this.setState({ [e.target.name]: e.target.value });
+    };
 
 
     render() {
+        const comments = this.state.comments;
+        let commentList;
+
+        if (!comments) {
+            commentList = "there is no comment record!";
+        } else {
+            commentList = comments.map((comment, k) =>
+                <CommentCard comment={comment} key={k} />
+            );
+        }
 
         const user = this.state.user;
         const loggedInUserID = getCookie("user");
+        const loggedIn = getCookie("loggedIn");
         return (
             <div className="User">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-10 m-auto">
                             <br /> <br />
-                            <Link to="/" className="btn btn-outline-warning float-left">
-                                Show Book List
+                            <Link to="/users" className="btn btn-outline-warning float-left">
+                                Show User List
                             </Link>
                         </div>
                         <br />
@@ -64,8 +117,40 @@ class User extends Component {
                             <hr /> <br />
                         </div>
                     </div>
-                    <div>
-                    </div>
+                    {loggedIn === "true" ? (
+                        <div>
+                            <h1>Comment:</h1>
+                            <form noValidate onSubmit={this.onSubmit}>
+                                <div className='form-group'>
+                                    <input
+                                        type='text'
+                                        placeholder='Title'
+                                        name='title'
+                                        className='form-control'
+                                        value={this.state.title}
+                                        onChange={this.onChange}
+                                    />
+                                </div>
+                                <br />
+
+                                <div className='form-group'>
+                                    <input
+                                        type='text'
+                                        placeholder='Description'
+                                        name='description'
+                                        className='form-control'
+                                        value={this.state.description}
+                                        onChange={this.onChange}
+                                    />
+                                </div>
+                                <input
+                                    type="submit"
+                                    className="btn btn-outline-warning btn-block mt-4"
+                                />
+                            </form>
+                        </div>) : (
+                        <div>
+                        </div>)}
                     {user._id === loggedInUserID ? (
                         <div>
                             <div className="row">
@@ -83,6 +168,9 @@ class User extends Component {
                     )
                     }
 
+                    <div className="list">
+                        {commentList}
+                    </div>
                 </div>
             </div >
         );

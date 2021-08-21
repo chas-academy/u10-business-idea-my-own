@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-// Load Book model
-const Book = require('../../models/User');
+// Load User model
+const User = require('../../models/User');
 
 // @route GET api/users/test
 // @description tests users route
 // @access Public
 router.get('/test', (req, res) => res.send('user route testing!'));
 
-// @route GET api/books
+// @route GET api/Users
 // @description Get all users
 // @access Public
 router.get('/', (req, res) => {
@@ -52,8 +52,8 @@ router.put('/:id', (req, res) => {
 // @access Public
 router.delete('/:id', (req, res) => {
     User.findByIdAndRemove(req.params.id, req.body)
-        .then(user => res.json({ mgs: 'Book entry deleted successfully' }))
-        .catch(err => res.status(404).json({ error: 'No such a book' }));
+        .then(user => res.json({ mgs: 'User entry deleted successfully' }))
+        .catch(err => res.status(404).json({ error: 'No such a User' }));
 });
 
 module.exports = router;
