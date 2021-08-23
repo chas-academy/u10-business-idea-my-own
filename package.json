@@ -1,0 +1,22 @@
+{
+  "name": "u10",
+  "version": "1.0.0",
+  "description": "<h1>U10 PROJECT</h1>",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chas-academy/u10-business-idea-my-own.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chas-academy/u10-business-idea-my-own/issues"
+  },
+  "homepage": "https://github.com/chas-academy/u10-business-idea-my-own#readme",
+  "devDependencies": {
+    "concurrently": "^6.2.1"
+  }
+}
